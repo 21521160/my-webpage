@@ -1,0 +1,627 @@
+<!-- 
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nền HTML từ Ảnh hoặc GIF và Hiệu ứng Chữ</title>
+    <style>
+        body {
+            background-image: url('./gif2.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .content {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .next-button, .video-next-button {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 2px solid white;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .next-button:hover, .video-next-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .video-container {
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .video-container video {
+            width: 60%;
+            max-width: 480px;
+            height: 480px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .video-text {
+            color: white;
+            font-size: 1em;
+            text-align: center;
+            max-width: 70%;
+        }
+
+        .video-container-2 {
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .video-container-2 video {
+            width: 40%;
+            height: 40;
+            border-radius: 10px;
+        }
+
+        .images-container {
+            display: none;
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            margin-top: 20px;
+        }
+
+        .images-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .image-caption {
+            color: white;
+            font-size: 1em;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .audio-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>DÙ ANH LÀM ĐIỀU NÀY NHƯNG ANH THẬT SỰ VẪN CHƯA HÌNH DUNG ĐƯỢC EM SẼ QUAY VỀ BÊN ANH KIỂU GÌ</h1>
+        <p>Nhưng anh vẫn phải thử, anh vẫn nhớ em, anh muốn chia sẻ lại 1 vài điều nhỏ nhoi về kỉ niệm ít ỏi của anh vớI em</p>
+        <button class="next-button" onclick="showVideo()">Next</button>
+    </div>
+
+    <div class="video-container" id="videoContainer" style="display: none;">
+        <video id="videoElement1" controls muted>
+            <source src="./aie.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video.
+        </video>
+        <div class="video-text">
+            <p>Video này là mình làm lành sau khi chia tay ngay Tết, em đã bảo em hết tình cảm....</p>
+            <button class="video-next-button" onclick="showNextVideos()">Next</button>
+        </div>
+    </div>
+
+    <div class="video-container-2" id="videoContainer2" style="display: none;">
+        <video id="videoElement2" controls muted>
+            <source src="./k_n.mp4" type="video/mp4">
+        </video>
+        <video id="videoElement3" controls muted>
+            <source src="./video_cmsn.mp4" type="video/mp4">
+        </video>
+        <div class="video-text">
+            <p>Lướt nhanh qua kỉ niệm, em chúc mừng sinh nhật anh lần đầu tiên....</p>
+            <button class="video-next-button" onclick="showImages()">Next</button>
+        </div>
+    </div>
+
+    <div class="images-container" id="imagesContainer" style="display: none;">
+        <div>
+            <img src="./image1.jpg" alt="Ảnh 1">
+            <div class="image-caption">Mình đi chơi</div>
+        </div>
+        <div>
+            <img src="./image2.jpg" alt="Ảnh 2">
+            <div class="image-caption">Mình yêu nhau</div>
+        </div>
+        <div>
+            <img src="./image3.jpg" alt="Ảnh 3">
+            <div class="image-caption">Bên nhau</div>
+        </div>
+        <div>
+            <img src="./image4.jpg" alt="Ảnh 4">
+            <div class="image-caption">Tết tóc</div>
+        </div>
+        <div>
+            <img src="./image5.jpg" alt="Ảnh 5">
+            <div class="image-caption">Nấu ăn</div>
+        </div>
+        <div>
+            <img src="./image6.jpg" alt="Ảnh 6">
+            <div class="image-caption">em xinh</div>
+        </div>
+        <div>
+            <img src="./image7.jpg" alt="Ảnh 7">
+            <div class="image-caption">Handmade</div>
+        </div>
+    </div>
+
+    <div class="audio-container" id="audioContainer">
+        <audio id="backgroundAudio">
+            <source src="./sound2.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <script>
+        function showVideo() {
+            // Ẩn phần chữ
+            document.querySelector('.content').style.display = 'none';
+            // Hiển thị video đầu tiên
+            document.getElementById('videoContainer').style.display = 'flex';
+            // Phát âm thanh
+            var audio = document.getElementById('backgroundAudio');
+            audio.play();
+        }
+
+        function showNextVideos() {
+            // Ẩn video đầu tiên
+            document.getElementById('videoContainer').style.display = 'none';
+            // Hiển thị các video còn lại
+            document.getElementById('videoContainer2').style.display = 'flex';
+
+            // Tự động chuyển đến video tiếp theo
+            var videoElement2 = document.getElementById('videoElement2');
+            videoElement2.play();
+            videoElement2.onended = function() {
+                var videoElement3 = document.getElementById('videoElement3');
+                videoElement3.play();
+                videoElement3.onended = function() {
+                    // Khi tất cả video đã phát xong, ẩn video và hiển thị ảnh
+                    document.getElementById('videoContainer2').style.display = 'none';
+                    document.getElementById('imagesContainer').style.display = 'flex';
+                };
+            };
+        }
+
+        function showImages() {
+            // Ẩn video và hiện ảnh
+            document.getElementById('videoContainer2').style.display = 'none';
+            document.getElementById('imagesContainer').style.display = 'flex';
+        }
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Page with Media and Interactivity</title>
+    <style>
+        body {
+            background-image: url('./gif2.gif');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            flex-direction: column;
+        }
+
+        .content {
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .next-button, .video-next-button {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 2px solid white;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .next-button:hover, .video-next-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .video-container {
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        .video-container video {
+            width: 60%;
+            max-width: 480px;
+            height: 480px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .video-text {
+            color: white;
+            font-size: 1em;
+            text-align: center;
+            max-width: 70%;
+        }
+
+        .video-container-2 {
+            display: none;
+            text-align: center;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .video-container-2 video {
+            width: 40%;
+            height: 40;
+            border-radius: 10px;
+        }
+
+        .images-container {
+            display: none;
+            text-align: center;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 20px;
+            margin-top: 20px;
+        }
+
+        .images-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .image-caption {
+            color: white;
+            font-size: 1em;
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .new-content {
+            display: none;
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .next-button {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 2px solid white;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .next-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .audio-container {
+            display: none;
+        }
+        .move-button {
+            margin-top: 20px;
+            padding: 8px 16px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: 2px solid white;
+            cursor: pointer;
+            font-size: 1em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .move-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+            transform: scale(1.05);
+        }
+
+        .final-content {
+            display: none;
+            text-align: center;
+            color: white;
+            font-size: 1.5em;
+            opacity: 0;
+            animation: fadeIn 3s ease-in-out forwards;
+            margin-bottom: 20px;
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div class="content">
+        <h1>DÙ ANH LÀM ĐIỀU NÀY NHƯNG ANH THẬT SỰ VẪN CHƯA HÌNH DUNG ĐƯỢC EM SẼ QUAY VỀ BÊN ANH KIỂU GÌ</h1>
+        <p>Nhưng anh vẫn phải thử, anh vẫn nhớ em, anh muốn chia sẻ lại 1 vài điều nhỏ nhoi về kỉ niệm ít ỏi của anh vớI em</p>
+        <button class="next-button" onclick="showVideo()">Next</button>
+    </div>
+
+    <div class="video-container" id="videoContainer" style="display: none;">
+        <video id="videoElement1" controls muted>
+            <source src="./aie.mp4" type="video/mp4">
+            Trình duyệt của bạn không hỗ trợ video.
+        </video>
+        <div class="video-text">
+            <p>Video này là mình làm lành sau khi chia tay ngay Tết, em đã bảo em hết tình cảm....</p>
+            <button class="video-next-button" onclick="showNextVideos()">Next</button>
+        </div>
+    </div>
+
+    <div class="video-container-2" id="videoContainer2" style="display: none;">
+        <video id="videoElement2" controls muted>
+            <source src="./k_n.mp4" type="video/mp4">
+        </video>
+        <video id="videoElement3" controls muted>
+            <source src="./video_cmsn.mp4" type="video/mp4">
+        </video>
+        <div class="video-text">
+            <p>Lướt nhanh qua kỉ niệm, em chúc mừng sinh nhật anh lần đầu tiên....</p>
+            <button class="video-next-button" onclick="showImages()">Next</button>
+        </div>
+    </div>
+
+    <div class="images-container" id="imagesContainer" style="display: none;">
+        <div>
+            <img src="./image1.jpg" alt="Ảnh 1">
+            <div class="image-caption">Mình đi chơi</div>
+        </div>
+        <div>
+            <img src="./image2.jpg" alt="Ảnh 2">
+            <div class="image-caption">Mình yêu nhau</div>
+        </div>
+        <div>
+            <img src="./image3.jpg" alt="Ảnh 3">
+            <div class="image-caption">Bên nhau</div>
+        </div>
+        <div>
+            <img src="./image4.jpg" alt="Ảnh 4">
+            <div class="image-caption">Tết tóc</div>
+        </div>
+        <div>
+            <img src="./image5.jpg" alt="Ảnh 5">
+            <div class="image-caption">Nấu ăn</div>
+        </div>
+        <div>
+            <img src="./image6.jpg" alt="Ảnh 6">
+            <div class="image-caption">em xinh</div>
+        </div>
+        <div>
+            <img src="./image7.jpg" alt="Ảnh 7">
+            <div class="image-caption">Handmade</div>
+        </div>
+            <button class="next-button" onclick="showNextContent()">Next</button>
+        </div>
+    </div>
+
+    <div class="new-content" id="newContent">
+        <h1>Mình quay lại được không em</h1>
+        <p>Anh muốn sửa chữa sai lầm...</p>
+        <button class="move-button" onclick="moveButton()">Không</button>
+        <button class="next-button" onclick="showFinalContent()">Có</button>
+    </div>
+
+    <div class="final-content" id="finalContent" style="display: none;">
+        <h1>Anh yêu em</h1>
+    </div>
+
+    <div class="audio-container" id="audioContainer">
+        <audio id="backgroundAudio">
+            <source src="./sound2.mp3" type="audio/mp3">
+        </audio>
+    </div>
+
+    <script>
+        function showVideo() {
+            // Ẩn phần chữ
+            document.querySelector('.content').style.display = 'none';
+            // Hiển thị video đầu tiên
+            document.getElementById('videoContainer').style.display = 'flex';
+            // Phát âm thanh
+            var audio = document.getElementById('backgroundAudio');
+            audio.play();
+        }
+
+        function showNextVideos() {
+            // Ẩn video đầu tiên
+            document.getElementById('videoContainer').style.display = 'none';
+            // Hiển thị các video còn lại
+            document.getElementById('videoContainer2').style.display = 'flex';
+
+            // Tự động chuyển đến video tiếp theo
+            var videoElement2 = document.getElementById('videoElement2');
+            videoElement2.play();
+            videoElement2.onended = function() {
+                var videoElement3 = document.getElementById('videoElement3');
+                videoElement3.play();
+                videoElement3.onended = function() {
+                    // Khi tất cả video đã phát xong, ẩn video và hiển thị ảnh
+                    document.getElementById('videoContainer2').style.display = 'none';
+                    document.getElementById('imagesContainer').style.display = 'flex';
+                };
+            };
+        }
+
+        function showImages() {
+            // Ẩn video và hiện ảnh
+            document.getElementById('videoContainer2').style.display = 'none';
+            document.getElementById('imagesContainer').style.display = 'flex';
+        }
+
+        function showNextContent() {
+            // Ẩn ảnh và hiện nội dung mới
+            document.getElementById('imagesContainer').style.display = 'none';
+            document.getElementById('newContent').style.display = 'block';
+        }
+        function moveButton() {
+            const button = document.querySelector('.move-button');
+            const buttonWidth = button.offsetWidth;
+            const buttonHeight = button.offsetHeight;
+
+            // Define the container size
+            const containerWidth = 400;
+            const containerHeight = 400;
+
+            // Calculate maximum allowable positions
+            const maxX = containerWidth - buttonWidth;
+            const maxY = containerHeight - buttonHeight;
+
+            // Generate random positions within the allowable range
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            // Apply the new position to the button within the container
+            button.style.position = 'absolute';
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+        }
+
+// Ensure to set up the container with the same dimensions
+document.addEventListener('DOMContentLoaded', () => {
+    // Attach the event listener
+    document.querySelector('.move-button').addEventListener('click', moveButton);
+});
+
+
+
+        function showFinalContent() {
+            // Hide the new content and show the final content
+            document.getElementById('newContent').style.display = 'none';
+            document.getElementById('finalContent').style.display = 'block';
+
+            // Optionally, you can draw a heart shape on the final content page
+            drawHeart();
+        }
+
+        function drawHeart() {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            canvas.style.position = 'fixed';
+            canvas.style.top = '400';
+            canvas.style.left = '400';
+            canvas.style.zIndex = '999'; // Ensure it's on top of other content
+
+            document.body.appendChild(canvas);
+
+            // Heart shape drawing
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.moveTo(200, 200);
+            ctx.bezierCurveTo(200, 150, 150, 150, 150, 200);
+            ctx.bezierCurveTo(150, 250, 200, 300, 200, 350);
+            ctx.bezierCurveTo(200, 300, 250, 250, 250, 200);
+            ctx.bezierCurveTo(250, 150, 200, 150, 200, 200);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+    </script>
+</body>
+</html>
